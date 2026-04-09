@@ -84,12 +84,21 @@ class LLMClient:
         Returns:
             解析后的JSON对象
         """
-        response = self.chat(
-            messages=messages,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            response_format={"type": "json_object"}
-        )
+        # LM Studio with some models only supports "text" or "json_schema"; skip json_object
+        try:
+            response = self.chat(
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                response_format={"type": "json_object"}
+            )
+        except Exception:
+            # Fallback: no response_format constraint, rely on prompt + regex extraction
+            response = self.chat(
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens
+            )
         # 清理markdown代码块标记
         cleaned_response = response.strip()
         cleaned_response = re.sub(r'^```(?:json)?\s*\n?', '', cleaned_response, flags=re.IGNORECASE)
@@ -99,5 +108,12 @@ class LLMClient:
         try:
             return json.loads(cleaned_response)
         except json.JSONDecodeError:
+            # Try to extract JSON object/array from response with extra surrounding text
+            match = re.search(r'\{[\s\S]*\}', cleaned_response)
+            if match:
+                try:
+                    return json.loads(match.group(0))
+                except json.JSONDecodeError:
+                    pass
             raise ValueError(f"LLM返回的JSON格式无效: {cleaned_response}")
 
