@@ -35,12 +35,12 @@
   "home": {
     "tagline": "Motore di Intelligenza Collettiva Conciso e Universale",
     "version": "/ v0.1-Anteprima",
-    "heroTitle1": "Carica Documenti,",
-    "heroTitle2": "Prevedi il Futuro",
-    "heroDesc": "Da un singolo documento, {brand} estrae i semi della realtà per auto-generare un mondo parallelo con fino a {agentScale}. Inietta variabili da una prospettiva divina per trovare l'{optimalSolution} nelle dinamiche di gruppo complesse.",
+    "heroTitle1": "Simula la Realt,",
+    "heroTitle2": "Governa il Futuro",
+    "heroDesc": "Da uno o pi         documenti, {brand} costruisce un gemello digitale della realt: genera automaticamente una societ di agenti con comportamenti realistici. Inietta variabili, osserva le dinamiche emergenti e individua l'{optimalSolution} prima che diventi realt.",
     "heroDescBrand": "MiroFish",
     "heroDescAgentScale": "milioni di Agenti",
-    "heroDescOptimalSolution": "\"ottimo locale\"",
+    "heroDescOptimalSolution": "\"soluzione ottimale\"",
     "slogan": "Lascia che gli Agenti provino il futuro, lascia che le decisioni prevalgano",
     "systemStatus": "Stato del Sistema",
     "systemReady": "Pronto",
@@ -69,7 +69,8 @@
     "promptPlaceholder": "// Descrivi la tua simulazione o requisito di previsione in linguaggio naturale",
     "engineBadge": "Motore: MiroFish-V1.0",
     "startEngine": "Avvia Motore",
-    "initializing": "Inizializzazione..."
+    "initializing": "Inizializzazione...",
+    "title": "MiroFish - Governa il Futuro"
   },
   "main": {
     "layoutGraph": "Grafo",
