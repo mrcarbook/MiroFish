@@ -38,7 +38,7 @@ const toggleDropdown = () => {
 
 const switchLocale = (key) => {
   locale.value = key
-  localStorage.setItem('locale', key)
+  localStorage.setItem('locale_v2', key)
   document.documentElement.lang = key
   open.value = false
 }
