@@ -201,3 +201,32 @@ MiroFish's simulation engine is powered by **[OASIS (Open Agent Social Interacti
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=666ghj/MiroFish&type=date&legend=top-left" />
  </picture>
 </a>
+---
+
+## 
+Questo fork introduce la **localizzazione completa in italiano** di MiroFish, pensata per contesti istituzionali italiani (Ministero del Lavoro, enti di previdenza, pubbliche amministrazioni).
+
+### Cosa  stato italianizzato
+
+| Componente | Descrizione |
+|---|---|
+| `locales/it.json` | 665 stringhe UI tradotte in italiano |
+| `locales/languages.json` | Italiano aggiunto come prima lingua disponibile |
+ `en` |
+ `it`, istruzioni LLM in italiano |
+
+### Come attivare l'italiano
+
+Il sistema si avvia gi in italiano. Per cambiare lingua, usa il selettore lingua nell'interfaccia (in alto a destra).
+
+Per forzare l'italiano nel backend (es. in thread asincroni):
+```python
+from app.utils.locale import set_locale
+set_locale('it')
+```
+
+### Caso d'uso: Simulazioni per Ammortizzatori Sociali
+
+Questo fork include inoltre le modifiche di stabilit per LLM locali (LM Studio) e il report di simulazione EPPI (Bilancio Tecnico 2023) come esempio di applicazione in ambito previdenziale italiano.
+
+Vedi `artifacts/report_eppi_bilancio_tecnico_2023.md` per il report di esempio.

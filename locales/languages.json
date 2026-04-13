@@ -1,4 +1,8 @@
 {
+  "it": {
+    "label": "Italiano",
+    "llmInstruction": "Rispondi sempre in italiano."
+  },
   "zh": {
     "label": "中文",
     "llmInstruction": "请使用中文回答。"
