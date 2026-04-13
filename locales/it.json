@@ -51,15 +51,15 @@
     "metricHighAvailDesc": "Milioni di Agenti",
     "workflowSequence": "Flusso di Lavoro",
     "step01Title": "Analisi Documenti",
-    "step01Desc": "Estrazione semi & iniezione memoria & costruzione GraphRAG",
+    "step01Desc": "Carica i tuoi documenti: il sistema estrae concetti chiave, costruisce una mappa della conoscenza e prepara la memoria del mondo simulato",
     "step02Title": "Allestimento Scenario",
-    "step02Desc": "Estrazione entità & generazione persona & iniezione config. Agente",
+    "step02Desc": "Gli attori del tuo scenario prendono vita: il sistema genera profili realistici, assegna comportamenti e configura l'ambiente di simulazione",
     "step03Title": "Simulazione",
-    "step03Desc": "Sim. parallela doppia piattaforma & analisi requisiti auto & memoria temporale",
+    "step03Desc": "La simulazione si avvia: gli agenti interagiscono su due piattaforme social in parallelo, round dopo round, con memoria evolutiva",
     "step04Title": "Report",
-    "step04Desc": "L'AgentReport interagisce con l'ambiente post-simulazione tramite strumenti avanzati",
+    "step04Desc": "Un agente AI analizza i risultati della simulazione e genera un report strutturato con scenari, tendenze e raccomandazioni",
     "step05Title": "Interazione",
-    "step05Desc": "Chatta con qualsiasi individuo simulato & dialoga con l'AgentReport",
+    "step05Desc": "Interroga direttamente qualsiasi agente simulato o approfondisci il report con domande libere all'AgentReport",
     "realitySeed": "01 / Seme della Realtà",
     "supportedFormats": "Formati: PDF, MD, TXT",
     "dragToUpload": "Trascina i file per caricarli",
@@ -75,7 +75,13 @@
     "layoutGraph": "Grafo",
     "layoutSplit": "Diviso",
     "layoutWorkbench": "Area di Lavoro",
-    "stepNames": ["Analisi Documenti", "Allestimento Scenario", "Esegui Simulazione", "Generazione Report", "Interazione Approfondita"]
+    "stepNames": [
+      "Analisi Documenti",
+      "Allestimento Scenario",
+      "Esegui Simulazione",
+      "Generazione Report",
+      "Interazione Approfondita"
+    ]
   },
   "step1": {
     "ontologyGeneration": "Generazione Ontologia",
