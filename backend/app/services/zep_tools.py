@@ -13,13 +13,20 @@ import json
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 
-from zep_cloud.client import Zep
+from ..utils.local_graph import LocalGraphClient
+from ..utils.local_graph.neo4j_conn import get_driver as _get_neo4j_driver
 
 from ..config import Config
 from ..utils.logger import get_logger
 from ..utils.llm_client import LLMClient
 from ..utils.locale import get_locale, t
-from ..utils.zep_paging import fetch_all_nodes, fetch_all_edges
+
+# Compatibilità: fetch_all_nodes/edges ora delegano a LocalGraphClient
+def fetch_all_nodes(client, graph_id, **kwargs):
+    return client.graph.node.get_by_graph_id(graph_id, limit=2000)
+
+def fetch_all_edges(client, graph_id, **kwargs):
+    return client.graph.edge.get_by_graph_id(graph_id, limit=2000)
 
 logger = get_logger('mirofish.zep_tools')
 
@@ -423,11 +430,7 @@ class ZepToolsService:
     RETRY_DELAY = 2.0
     
     def __init__(self, api_key: Optional[str] = None, llm_client: Optional[LLMClient] = None):
-        self.api_key = api_key or Config.ZEP_API_KEY
-        if not self.api_key:
-            raise ValueError("ZEP_API_KEY 未配置")
-        
-        self.client = Zep(api_key=self.api_key)
+        self.client = LocalGraphClient()
         # LLM客户端用于InsightForge生成子问题
         self._llm_client = llm_client
         logger.info(t("console.zepToolsInitialized"))

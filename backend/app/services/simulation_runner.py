@@ -438,6 +438,7 @@ class SimulationRunner:
             process = subprocess.Popen(
                 cmd,
                 cwd=sim_dir,
+                stdin=subprocess.DEVNULL,  # prevent bad file descriptor when parent stdin is closed
                 stdout=main_log_file,
                 stderr=subprocess.STDOUT,  # stderr 也写入同一个文件
                 text=True,

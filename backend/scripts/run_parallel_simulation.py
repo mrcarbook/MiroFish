@@ -1034,6 +1034,8 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
     return ModelFactory.create(
         model_platform=ModelPlatformType.OPENAI,
         model_type=llm_model,
+        timeout=120.0,
+        max_retries=2,
     )
 
 
@@ -1570,6 +1572,25 @@ async def main():
     log_manager.info(f"  - Reddit动作: reddit/actions.jsonl")
     log_manager.info("=" * 60)
     
+    # Warmup: ensure LLM is loaded before CAMEL agents start making async calls.
+    # Local models (e.g. LM Studio) may need up to 60s to load on first request.
+    llm_base_url = os.environ.get("LLM_BASE_URL", "")
+    llm_model = os.environ.get("LLM_MODEL_NAME", "")
+    if llm_base_url and llm_model:
+        import httpx
+        log_manager.info(f"[Warmup] Pre-loading model {llm_model} on {llm_base_url}...")
+        try:
+            async with httpx.AsyncClient(timeout=120) as client:
+                await client.post(
+                    f"{llm_base_url.rstrip('/')}/chat/completions",
+                    headers={"Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY','lm-studio')}",
+                             "Content-Type": "application/json"},
+                    json={"model": llm_model, "messages": [{"role": "user", "content": "hi"}], "max_tokens": 3}
+                )
+            log_manager.info("[Warmup] Model ready.")
+        except Exception as e:
+            log_manager.warning(f"[Warmup] Warning: {e}")
+
     start_time = datetime.now()
     
     # 存储两个平台的模拟结果

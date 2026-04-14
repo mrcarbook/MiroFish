@@ -14,12 +14,27 @@ for (const path in localeFiles) {
   }
 }
 
-const savedLocale = localStorage.getItem('locale') || 'zh'
+// Use versioned key so old 'zh' default doesn't override Italian default
+const LOCALE_KEY = 'locale_v2'
+const DEFAULT_LOCALE = 'it'
+const savedLocale = localStorage.getItem(LOCALE_KEY) || DEFAULT_LOCALE
+
+// Migrate old key: if user had explicitly set a non-default locale, preserve it
+const legacyLocale = localStorage.getItem('locale')
+const resolvedLocale = localStorage.getItem(LOCALE_KEY)
+  ? savedLocale
+  : (legacyLocale && legacyLocale !== 'zh' && messages[legacyLocale])
+    ? legacyLocale
+    : DEFAULT_LOCALE
+
+// Save resolved locale with new key and clean up old one
+localStorage.setItem(LOCALE_KEY, resolvedLocale)
+localStorage.removeItem('locale')
 
 const i18n = createI18n({
   legacy: false,
-  locale: savedLocale,
-  fallbackLocale: 'zh',
+  locale: resolvedLocale,
+  fallbackLocale: 'en',
   messages
 })
 

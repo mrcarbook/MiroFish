@@ -69,10 +69,6 @@
           <!-- 数据指标卡片 -->
           <div class="metrics-row">
             <div class="metric-card">
-              <div class="metric-value">{{ $t('home.metricLowCost') }}</div>
-              <div class="metric-label">{{ $t('home.metricLowCostDesc') }}</div>
-            </div>
-            <div class="metric-card">
               <div class="metric-value">{{ $t('home.metricHighAvail') }}</div>
               <div class="metric-label">{{ $t('home.metricHighAvailDesc') }}</div>
             </div>

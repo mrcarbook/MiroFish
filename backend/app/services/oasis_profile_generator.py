@@ -534,8 +534,9 @@ class OasisProfileGenerator:
                         {"role": "user", "content": prompt}
                     ],
                     response_format={"type": "json_object"},
-                    temperature=0.7 - (attempt * 0.1)  # 每次重试降低温度
-                    # 不设置max_tokens，让LLM自由发挥
+                    temperature=0.7 - (attempt * 0.1),  # 每次重试降低温度
+                    max_tokens=2000,  # prevent timeout on free-tier models
+                    timeout=60        # 60-second hard timeout per attempt
                 )
                 
                 content = response.choices[0].message.content
@@ -1097,6 +1098,8 @@ class OasisProfileGenerator:
             
             # 写入数据行
             for idx, profile in enumerate(profiles):
+                if profile is None:
+                    continue
                 # user_char: 完整人设（bio + persona），用于LLM系统提示
                 user_char = profile.bio
                 if profile.persona and profile.persona != profile.bio:

@@ -1,4 +1,17 @@
 services:
+  neo4j:
+    image: neo4j:5-community
+    container_name: mirofish-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/mirofish2024
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - "7474:7474"   # Neo4j Browser
+      - "7687:7687"   # Bolt
+    volumes:
+      - neo4j_data:/data
+    restart: unless-stopped
+
   mirofish:
     image: ghcr.io/666ghj/mirofish:latest
     # 加速镜像（如拉取缓慢可替换上方地址）
@@ -12,3 +25,5 @@ services:
     restart: unless-stopped
     volumes:
       - ./backend/uploads:/app/backend/uploads
+volumes:
+  neo4j_data:
